@@ -1,4 +1,5 @@
 import Sudoku
+import Display
 import Data.List
 
 f :: Int -> Cell

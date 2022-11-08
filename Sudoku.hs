@@ -3,11 +3,7 @@ module Sudoku
   Sudoku(..)
   ,Cell(..)
   ,getSolutions
-  ,coordList
-  ,prettyPrint
   ) where
-
-import Data.List
 
 data Cell = FixedCell {fixedValue :: Int} | EmptyCell deriving (Show, Eq)
  
@@ -102,7 +98,3 @@ getSolutions sudoku
         let
           newSudokus = [fixCell sudoku fnf v | v <- fnfPoss]
         in concat [getSolutions s | s <- newSudokus]
-
-prettyPrint :: Sudoku -> String
-prettyPrint (Sudoku cells) = let stringCells = [map (show . fixedValue) r | r <- cells]
-  in intercalate "\n" (map ((intercalate " ")) stringCells)
