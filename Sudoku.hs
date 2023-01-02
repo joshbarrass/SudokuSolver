@@ -90,11 +90,11 @@ getNonFixed sudoku = snd $ head (dropWhile (isFixed . fst) cl)
 getSolutions :: Sudoku -> [Sudoku]
 getSolutions sudoku
   | solved sudoku = [sudoku]
-  | otherwise = let
-      fnf = getNonFixed sudoku
-      fnfPoss = possibilities sudoku fnf
+  | let
       valid = fnfPoss /= []
-      in if not valid then [] else
-        let
-          newSudokus = [fixCell sudoku fnf v | v <- fnfPoss]
-        in concat [getSolutions s | s <- newSudokus]
+    in not valid = []
+  | otherwise = let
+      newSudokus = [fixCell sudoku fnf v | v <- fnfPoss]
+      in concat [getSolutions s | s <- newSudokus]
+  where fnf = getNonFixed sudoku
+        fnfPoss = possibilities sudoku fnf
